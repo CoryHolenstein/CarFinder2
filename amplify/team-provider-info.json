@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-carfinder-dev-190212-authRole",
+      "UnauthRoleArn": "arn:aws:iam::516774873258:role/amplify-carfinder-dev-190212-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::516774873258:role/amplify-carfinder-dev-190212-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-carfinder-dev-190212-deployment",
+      "UnauthRoleName": "amplify-carfinder-dev-190212-unauthRole",
+      "StackName": "amplify-carfinder-dev-190212",
+      "StackId": "arn:aws:cloudformation:us-east-1:516774873258:stack/amplify-carfinder-dev-190212/7a6bf060-1de3-11ee-bf69-0a75814dc119",
+      "AmplifyAppId": "d36ii7ob1w1noh"
+    }
+  }
+}
