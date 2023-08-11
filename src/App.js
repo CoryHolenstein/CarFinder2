@@ -24,3 +24,5 @@ function App() {
 }
 
 export default App;
+//private routes
+//https://stackoverflow.com/questions/62384395/protected-route-with-react-router-v6#:~:text=Here%20is%20my%20working%20example%20for%20implementing%20private,%28routes%20%28isLoggedIn%29%29%3B%20return%20%28%3C%3E%20%7Brouting%7D%20%3C%2F%3E%29%3B%20%7D%20routes.js

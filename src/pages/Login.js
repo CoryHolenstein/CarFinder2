@@ -1,15 +1,24 @@
 
 
-
+import { emailState, loggedInState } from '../atoms';
 import * as React from 'react';
 import { useState } from "react";
 import { TextField, Button } from '@aws-amplify/ui-react';
 import axios from 'axios';
+import {useRecoilState } from 'recoil'
+import { useNavigate } from 'react-router-dom';
 function Login() {
 
-    const [email, setEmail] = useState("");
+    //const [email, setEmail] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(loggedInState);
+    const [email, setEmail] = useRecoilState(emailState);
     const [password, setPassword] = useState("");
 
+    let navigate = useNavigate();
+    const routeChange = (input) => {
+        let path = input;
+        navigate(path);
+    }
 
     const submitForm = (event) => {
         event.preventDefault();
@@ -25,6 +34,9 @@ function Login() {
             .catch(function (error) {
                 console.log(error);
             });
+
+        routeChange("../home");
+        setIsLoggedIn("true");
     }
 
     return (

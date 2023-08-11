@@ -7,12 +7,15 @@ import { Amplify } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import "@aws-amplify/ui-react/styles.css";
 import { BrowserRouter } from "react-router-dom";
+import {RecoilRoot } from 'recoil'
 Amplify.configure(awsconfig);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    <RecoilRoot>
   <BrowserRouter>
     <App />
-    </BrowserRouter>
+        </BrowserRouter>
+    </RecoilRoot>
 );
 
 // If you want to start measuring performance in your app, pass a function
