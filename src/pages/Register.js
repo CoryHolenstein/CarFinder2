@@ -28,7 +28,7 @@ function Register() {
             alert("Passwords do not match!");
             return;
         } else {
-            axios.post('/user', {
+            axios.post('https://i5iopgtii5.execute-api.us-east-1.amazonaws.com/dev/user/register', {
                 email: email,
                 password: password
             })

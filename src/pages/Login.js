@@ -24,7 +24,7 @@ function Login() {
         event.preventDefault();
         console.log(email, password);
 
-        axios.post('/user', {
+        axios.post('https://i5iopgtii5.execute-api.us-east-1.amazonaws.com/dev/user/login', {
             email: email,
             password: password
         })
