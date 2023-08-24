@@ -1,18 +1,37 @@
 ﻿import logo from './logo.svg';
 import './App.css';
-import {  Route, Routes } from "react-router-dom";
+import { Route, Routes, Outlet, Navigate } from 'react-router-dom'
 
 import Error from './pages/Error';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import { Protected } from './components/Protected'
+import {
+    useRecoilValue
+} from 'recoil';
+import { isLoggedInState } from './atoms';
+
+
+
+
 function App() {
+
+    const [isLoggedIn, setIsLoggedIn] = useRecoilValue(isLoggedInState);
+
   return (
     <div className="App">
   
-              <Routes>
-                  <Route path="home" default element={<Home />} />
-                  <Route path="" element={<Home />} />
+          <Routes>
+     
+              <Route path="home"
+                  element={
+                      <Protected loginStatus={isLoggedIn}>
+                          <Home />
+                      </Protected>
+                  } />
+
+                  <Route path="/" element={<Login />} />
                   <Route path="login" element={<Login />} />
                   <Route path="register" element={<Register />} />
 

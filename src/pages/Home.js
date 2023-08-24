@@ -1,14 +1,14 @@
 
 
 import { useRecoilValue } from 'recoil';
-import { emailState } from '../atoms';
+import { usernameState } from '../atoms';
 import * as React from 'react';
 import { useState } from "react";
 import { TextField, Button } from '@aws-amplify/ui-react';
 import axios from 'axios';
 function Home() {
 
-    const [email, setEmail] = useRecoilValue(emailState);
+    const [username, setUsername] = useRecoilValue(usernameState);
     const [spotName, setSpotName] = useState("");
     const [streetName, setStreetName] = useState("");
     const [spotNotes, setSpotNotes] = useState("");
@@ -35,7 +35,7 @@ function Home() {
     return (
         <div>
             <h1>Home</h1>
-            <h2>Hello {email}</h2>
+            <h2>Hello {username}</h2>
             <h3>Save a Spot</h3>
             <form onSubmit={saveSpot}>
             <TextField

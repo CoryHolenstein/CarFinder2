@@ -5,12 +5,12 @@ export const exampleTokenState = atom({
     default:"",
 });
 
-export const emailState = atom({
-    key: "emailState",
+export const usernameState = atom({
+    key: "usernameState",
     default: "",
 });
 
-export const loggedInState = atom({
-    key: "loggedInState",
+export const isLoggedInState = atom({
+    key: "isLoggedInState",
     default: "false"
 })

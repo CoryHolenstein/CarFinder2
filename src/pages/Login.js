@@ -1,17 +1,18 @@
 
 
-import { emailState, loggedInState } from '../atoms';
+import { usernameState, isLoggedInState } from '../atoms';
 import * as React from 'react';
 import { useState } from "react";
 import { TextField, Button } from '@aws-amplify/ui-react';
 import axios from 'axios';
 import {useRecoilState } from 'recoil'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
+
 function Login() {
 
     //const [email, setEmail] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useRecoilState(loggedInState);
-    const [email, setEmail] = useRecoilState(emailState);
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
+    const [username, setUsername] = useRecoilState(usernameState);
     const [password, setPassword] = useState("");
 
     let navigate = useNavigate();
@@ -22,21 +23,32 @@ function Login() {
 
     const submitForm = (event) => {
         event.preventDefault();
-        console.log(email, password);
+        console.log(username, password);
 
-        axios.post('https://i5iopgtii5.execute-api.us-east-1.amazonaws.com/dev/user/login', {
-            email: email,
+        const body = {
+            username: username,
+            password: password
+        };
+
+        var url = "https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/login";
+
+        axios.post(url, {
+            username: username,
             password: password
         })
             .then(function (response) {
                 console.log(response);
+                if (response.data.responseStatus === "OK") {
+                    setIsLoggedIn("true");
+                    routeChange("../home");
+                }
             })
             .catch(function (error) {
                 console.log(error);
             });
 
-        routeChange("../home");
-        setIsLoggedIn("true");
+        //  routeChange("../home");
+       
     }
 
     return (
@@ -51,7 +63,7 @@ function Login() {
                         placeholder="Email"
                         label="Email"
                         errorMessage="There is an error"
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={e => setUsername(e.target.value)}
                     
                     />
                 <br></br>
@@ -63,7 +75,8 @@ function Login() {
                     />
                 <Button size="small" type="submit">Login</Button>
              </form>
-
+                <h1> No Account?</h1>
+                <NavLink to="/register">Register now!</NavLink>
 
             </center>
         </div>
