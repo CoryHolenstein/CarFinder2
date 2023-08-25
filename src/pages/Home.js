@@ -16,23 +16,26 @@ function Home() {
             userDecisionTimeout: 5000,
         });
     const username = useRecoilValue(usernameState);
+
     const [spotName, setSpotName] = useState("");
-    const [streetName, setStreetName] = useState("");
-    const [spotNotes, setSpotNotes] = useState("");
     const [spotNumber, setSpotNumber] = useState("");
     const [spotLevel, setSpotLevel] = useState("");
-
+    const [streetName, setStreetName] = useState("");
+    const [spotNotes, setSpotNotes] = useState("");
 
     const saveSpot = (event) => {
         event.preventDefault();
-        axios.post('/savespot', {
+        axios.post('https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/savespot', {
             username: username,
-            spotName: spotName,
-            streetName: streetName,
-            spotNotes: spotNotes,
             latitude: coords.latitude,
             longitude: coords.longitude,
-            altitude: coords.altitude
+            altitude: coords.altitude,
+            spotName: spotName,
+            spotNumber: spotNumber,
+            spotLevel: spotLevel,
+            streetName: streetName,
+            spotNotes: spotNotes
+             
         })
             .then(function (response) {
                 console.log(response);
@@ -71,7 +74,7 @@ function Home() {
                     placeholder="Spot Level"
                     label="Spot Level"
                     errorMessage="There is an error"
-                    onChange={e => setStreetName(e.target.value)}
+                    onChange={e => setSpotLevel(e.target.value)}
              />
             <TextField
                 placeholder="Street Name"

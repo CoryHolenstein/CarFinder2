@@ -38,7 +38,7 @@ function Login() {
         })
             .then(function (response) {
                 console.log(response);
-                if (response.data.responseStatus === "OK") {
+                if (response.data === "OK") {
                     setIsLoggedIn("true");
                     routeChange("../home");
                 }
