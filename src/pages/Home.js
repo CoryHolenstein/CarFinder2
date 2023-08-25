@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { usernameState } from '../atoms';
 import * as React from 'react';
 import { useState } from "react";
-import { TextField, Button } from '@aws-amplify/ui-react';
+import { TextField, Button, Flex } from '@aws-amplify/ui-react';
 import { useGeolocated } from "react-geolocated";
 import axios from 'axios';
 function Home() {
@@ -51,6 +51,8 @@ function Home() {
             <h1>Home</h1>
             <h2>Hello {username}</h2>
             <h3>Save a Spot</h3>
+            <center>
+            <Flex direction="column" width="55%">
             <form onSubmit={saveSpot}>
             <TextField
                 placeholder="Spot Name"
@@ -83,8 +85,10 @@ function Home() {
                 errorMessage="There is an error"
                 onChange={e => setSpotNotes(e.target.value)}
             />
-            <Button size="small" type="submit">Save Spot</Button>
-            </form>
+                <Button size="small" type="submit">Save Spot</Button>
+                </form>
+                </Flex>
+            </center>
         </div>
 
         );
