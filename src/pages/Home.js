@@ -23,13 +23,30 @@ function Home() {
     const [streetName, setStreetName] = useState("");
     const [spotNotes, setSpotNotes] = useState("");
 
+    let altitude = "";
+
     const saveSpot = (event) => {
         event.preventDefault();
+        console.log("latitude: " + coords.latitude);
+        console.log("longitude: " + coords.longitude);
+        console.log("altitude: " + altitude);
+
+        console.log("username: " + username);
+        console.log("spotName: " + spotName);
+        console.log("spotNumber: " + spotNumber);
+        console.log("spotLevel: " + spotLevel);
+        console.log("streetName: " + streetName);
+        console.log("spotNotes: " + spotNotes);
+
+        if (coords.altitude === null) {
+            altitude = "0";
+        }
+
         axios.post('https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/savespot', {
             username: username,
             latitude: coords.latitude,
             longitude: coords.longitude,
-            altitude: coords.altitude,
+            altitude: altitude,
             spotName: spotName,
             spotNumber: spotNumber,
             spotLevel: spotLevel,
