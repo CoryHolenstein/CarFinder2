@@ -1,5 +1,5 @@
 
-
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { usernameState } from '../atoms';
 import * as React from 'react';
@@ -24,7 +24,11 @@ function Home() {
     const [spotNotes, setSpotNotes] = useState("");
 
     let altitude = "";
-
+    let navigate = useNavigate();
+    const routeChange = (input) => {
+        let path = input;
+        navigate(path);
+    }
     const saveSpot = (event) => {
         event.preventDefault();
         console.log("latitude: " + coords.latitude);
@@ -56,6 +60,9 @@ function Home() {
         })
             .then(function (response) {
                 console.log(response);
+                if (response.data === "OK") {
+                    routeChange("../myspots");
+                }
             })
             .catch(function (error) {
                 console.log(error);

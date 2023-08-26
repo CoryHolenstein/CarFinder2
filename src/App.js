@@ -6,6 +6,7 @@ import Error from './pages/Error';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import MySpots from './pages/MySpots';
 import { Protected } from './components/Protected'
 import {
     useRecoilValue
@@ -17,7 +18,7 @@ import { isLoggedInState } from './atoms';
 
 function App() {
 
-    const [isLoggedIn, setIsLoggedIn] = useRecoilValue(isLoggedInState);
+    const isLoggedIn = useRecoilValue(isLoggedInState);
 
   return (
     <div className="App">
@@ -30,11 +31,16 @@ function App() {
                           <Home />
                       </Protected>
                   } />
+              <Route path="myspots"
+                  element={
+                      <Protected loginStatus={isLoggedIn}>
+                          <MySpots />
+                      </Protected>
+                  } />
 
                   <Route path="/" element={<Login />} />
                   <Route path="login" element={<Login />} />
                   <Route path="register" element={<Register />} />
-
                   <Route path="error" element={<Error />} />
               </Routes>
     
