@@ -2,10 +2,11 @@
 import { usernameState, isLoggedInState } from '../atoms';
 import * as React from 'react';
 import { useState } from "react";
-import { TextField, Button } from '@aws-amplify/ui-react';
+import { TextField, Button, Flex } from '@aws-amplify/ui-react';
 import axios from 'axios';
 import { useRecoilState } from 'recoil'
 import { useNavigate, NavLink } from 'react-router-dom';
+import { getEmailRegex } from '../constants/RegexPatterns' 
 function Register() {
 
     //const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ function Register() {
     const [password, setPassword] = useState("");
     const [passwordConf, setPasswordConf] = useState("");
 
+   
     let navigate = useNavigate();
     const routeChange = (input) => {
         let path = input;
@@ -24,13 +26,20 @@ function Register() {
         event.preventDefault();
         console.log(username, password);
 
-        const body = {
-            username: username,
-            password: password
-        };
+        if (password !== passwordConf) {
+            alert("passwords do not match")
+            return;
+        } 
+
+        if (password.length < 10) {
+            alert("password needs to be at least 10 characters")
+            return;
+        }
+
+        
+
 
         var url = "https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/register";
-        console.log(body);
         axios.post(url, {
            username: username,
             password: password
@@ -49,7 +58,6 @@ function Register() {
           //  routeChange("../home");
             setIsLoggedIn("true");
         }
-    
 
     return (
         <div>
@@ -57,31 +65,36 @@ function Register() {
             <center>
                 <div> Register </div>
 
-
+                <Flex direction="column" width="55%">
                 <form onSubmit={submitForm}>
+                        <TextField
+                            type="email"
+                            placeholder="Email"
+                            label="Email"
+                            required={true}
+                            errorMessage="There is an error"
+                            onChange={e => setUsername(e.target.value)}
+                            pattern={getEmailRegex}
+                    />
+                    <br></br>
                     <TextField
-                        placeholder="Email"
-                        label="Email"
-                        errorMessage="There is an error"
-                        onChange={e => setUsername(e.target.value)}
-
+                            placeholder="Password"
+                            label="Password"
+                            errorMessage="There is an error"
+                            required={true}
+                            onChange={e => setPassword(e.target.value)}
                     />
                     <br></br>
                     <TextField
                         placeholder="Password Confirmation"
-                        label="Password"
-                        errorMessage="There is an error"
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <br></br>
-                    <TextField
-                        placeholder="Password"
-                        label="Password"
-                        errorMessage="There is an error"
+                        label="Password Confirmation"
+                            errorMessage="There is an error"
+                            required={true}
                         onChange={e => setPasswordConf(e.target.value)}
-                    />
-                    <Button size="small" type="submit">Register</Button>
-                </form>
+                        />
+                        <Button size="small" type="submit" >Register</Button>
+                    </form>
+                </Flex>
                 <h1> Have an Account?</h1>
                 <NavLink to="/login">Login here!</NavLink>
 

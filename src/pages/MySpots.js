@@ -10,7 +10,7 @@ import { useRecoilValue } from 'recoil';
 import { usernameState } from '../atoms';
 
 function MySpots() {
-
+    const [savedSpots, setSavedSpots] = useState([]);
     const username = useRecoilValue(usernameState);
     useEffect(() => {
         
@@ -21,18 +21,32 @@ function MySpots() {
 
         })
             .then(function (response) {
-                console.log(response);
+                setSavedSpots(response.data);
+                console.log("response " + response);
+                console.log("saved spots " + savedSpots[0].spotname);
             })
             .catch(function (error) {
                 console.log(error);
             });
-    });
+    },[]);
 
 
     return (
         <div>
         <div>My Spots </div>
-            <div >  <NavLink to="/home">Save another spot!</NavLink> </div>
+            <div>
+                {savedSpots.map(spot => {
+                    <tr key={spot.spotname}>
+                        
+                        <td>{spot.createtime} </td>  
+                        <td>{spot.spotname} </td>  
+                        <td>{spot.createtime} </td>  
+                    </tr>
+                })}
+
+                <NavLink to="/home">Save another spot!</NavLink>
+
+            </div>
 
         </div>
     );

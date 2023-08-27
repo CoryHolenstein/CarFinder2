@@ -1,5 +1,5 @@
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { usernameState } from '../atoms';
 import * as React from 'react';
@@ -115,6 +115,8 @@ function Home() {
                 <Button size="small" type="submit">Save Spot</Button>
                 </form>
                 </Flex>
+                <br></br>
+                <NavLink to="/myspots">My spots</NavLink>
             </center>
         </div>
 
