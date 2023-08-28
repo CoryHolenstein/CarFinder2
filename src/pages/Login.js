@@ -71,7 +71,7 @@ function Login() {
                         errorMessage="There is an error"
                         onChange={e => setPassword(e.target.value)}
                     />
-                        <Button size="small" type="submit" >Register</Button>
+                        <Button size="small" type="submit" >Login</Button>
                     </form>
                 </Flex>
                 <h1> No Account?</h1>

@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import MySpots from './pages/MySpots';
+
 import { Protected } from './components/Protected'
 import {
     useRecoilValue
@@ -40,6 +41,7 @@ function App() {
 
                   <Route path="/" element={<Login />} />
                   <Route path="login" element={<Login />} />
+                
                   <Route path="register" element={<Register />} />
                   <Route path="error" element={<Error />} />
               </Routes>
