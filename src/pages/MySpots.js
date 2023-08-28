@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { usernameState } from '../atoms';
 import { NavLink } from 'react-router-dom';
-
+import { NavBar } from '../components/NavBar'
 const API_URL = 'https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/getspots';
 
 const MySpots = () => {
@@ -32,6 +32,7 @@ const MySpots = () => {
         <div>
             <h1>My Spots</h1>
             <center>
+                <NavBar/>
             <div className="spots">
                 {data.map((item, index) => (
                     <h3 key={index}>

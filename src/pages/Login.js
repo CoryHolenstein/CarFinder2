@@ -15,6 +15,8 @@ function Login() {
     const [username, setUsername] = useRecoilState(usernameState);
     const [password, setPassword] = useState("");
 
+    const [errorResponse, setErrorResponse] = useState("");
+
     let navigate = useNavigate();
     const routeChange = (input) => {
         let path = input;
@@ -36,6 +38,9 @@ function Login() {
                 if (response.data === "OK") {
                     setIsLoggedIn("true");
                     routeChange("../home");
+                } else {
+                    setErrorResponse("Wrong email or password!");
+                    setTimeout(() => { setErrorResponse("") }, 8500);
                 }
             })
             .catch(function (error) {
@@ -73,6 +78,7 @@ function Login() {
                     />
                         <Button size="small" type="submit" >Login</Button>
                     </form>
+                    <h3 className="error-response">{errorResponse}</h3>
                 </Flex>
                 <h1> No Account?</h1>
                 <NavLink to="/register">Register now!</NavLink>

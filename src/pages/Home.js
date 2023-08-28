@@ -2,6 +2,7 @@
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { usernameState } from '../atoms';
+import { NavBar } from '../components/NavBar';
 import * as React from 'react';
 import { useState } from "react";
 import { TextField, Button, Flex } from '@aws-amplify/ui-react';
@@ -77,6 +78,7 @@ function Home() {
         <div>
             <h1>Home</h1>
             <h2>Hello {username}</h2>
+            <NavBar/>
             <h3>Save a Spot</h3>
             <center>
             <Flex direction="column" width="55%">
@@ -115,8 +117,8 @@ function Home() {
                 <Button size="small" type="submit">Save Spot</Button>
                 </form>
                 </Flex>
-                <br></br>
-                <NavLink to="/myspots">My spots</NavLink>
+       
+               
             </center>
         </div>
 

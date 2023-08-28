@@ -14,7 +14,7 @@ function Register() {
     const [username, setUsername] = useRecoilState(usernameState);
     const [password, setPassword] = useState("");
     const [passwordConf, setPasswordConf] = useState("");
-
+    const [errorResponse, setErrorResponse] = useState("");
    
     let navigate = useNavigate();
     const routeChange = (input) => {
@@ -48,7 +48,10 @@ function Register() {
                     console.log(response);
                     if (response.data === "OK") {
                         setIsLoggedIn("true");
-                        routeChange("../home");
+                        routeChange("../verifyemail");
+                    } else {
+                        setErrorResponse("Email exists already!");
+                        setTimeout(() => { setErrorResponse("") }, 8500);
                     }
                 })
                 .catch(function (error) {
@@ -94,6 +97,7 @@ function Register() {
                         />
                         <Button size="small" type="submit" >Register</Button>
                     </form>
+                    <h3 className="error-response">{errorResponse}</h3>
                 </Flex>
                 <h1> Have an Account?</h1>
                 <NavLink to="/login">Login here!</NavLink>

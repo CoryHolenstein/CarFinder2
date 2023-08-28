@@ -7,12 +7,15 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import MySpots from './pages/MySpots';
+import Logout from './pages/Logout';
+import VerifyEmail from './pages/VerifyEmail';
 
 import { Protected } from './components/Protected'
 import {
     useRecoilValue
 } from 'recoil';
 import { isLoggedInState } from './atoms';
+
 
 
 
@@ -38,9 +41,22 @@ function App() {
                           <MySpots />
                       </Protected>
                   } />
+              <Route path="logout"
+                  element={
+                      <Protected loginStatus={isLoggedIn}>
+                          <Logout />
+                      </Protected>
+                  } />
+              <Route path="verifyemail"
+                  element={
+                      <Protected loginStatus={isLoggedIn}>
+                          <VerifyEmail />
+                      </Protected>
+                  } />
 
                   <Route path="/" element={<Login />} />
                   <Route path="login" element={<Login />} />
+                  
                 
                   <Route path="register" element={<Register />} />
                   <Route path="error" element={<Error />} />
