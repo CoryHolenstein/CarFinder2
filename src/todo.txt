@@ -1,0 +1,15 @@
+bugs:
+create time is 0000 for whatever reason
+
+
+features to be added:
+logout page
+navigation component for pages
+settings page
+remember me button
+ability to click on a saved spot and open it in their maps
+when user fails password logging in, they need an error message
+pages need color
+using Amplify instead of native html buttons
+need to set page title isntead of "react app"
+footer component
