@@ -8,6 +8,9 @@ const API_URL = 'https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user
 
 const MySpots = () => {
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [errorResponse, setErrorResponse] = useState("");
+
     const username = useRecoilValue(usernameState);
 
     const body = {
@@ -15,12 +18,20 @@ const MySpots = () => {
     };
 
     useEffect(() => {
-        
+        setIsLoading(false);
+
 
         const fetchData = async () => {
             try {
                 const response = await axios.post(API_URL, body);
                 setData(response.data);
+                if (response.data === "NONE") {
+                    setErrorResponse("No saved spots!");
+                } else if (response.data === "ERROR") {
+                    setErrorResponse("Error connecting to server.");
+                }
+                console.log(errorResponse);
+
             } catch (error) {
                 console.error(error);
             }
@@ -28,27 +39,38 @@ const MySpots = () => {
         fetchData();
     }, []);
 
-    return (
-        <div>
-            <h1>My Spots</h1>
-            <center>
-                <NavBar/>
-            <div className="spots">
-                {data.map((item, index) => (
-                    <h3 key={index}>
-                        <tr> Spot Name: {item.spotname} {item.createtime} </tr>
-                           Streetname: {item.streetname}
-                            Notes: {item.spotnotes}
-                           <br></br><button> Open in maps</button>
-
-
-                    </h3>
-                ))}
-                </div>
-            </center>
-            <NavLink to="/home">Save another spot!</NavLink> <br></br>
+    if (isLoading === true) {
+        return <div>Loading...</div>
+    } else if (errorResponse !== "") {
+        return <div>
+            <h3 className="error-response">{errorResponse}</h3><br></br>
+            <NavLink to="/home">Return home</NavLink> <br></br>
         </div>
-    );
+    } else {
+        return (
+            <div>
+                <NavBar />
+                <h1>My Spots</h1>
+                <center>
+                    <div className="spots">
+                       
+                        {data.map((item, index) => (
+                            <h3 key={index}>
+                                <tr> Spot Name: {item.spotname} {item.createtime} </tr>
+                                Streetname: {item.streetname}
+                                Notes: {item.spotnotes}
+                                <br></br><button> Open in maps</button>
+
+
+                            </h3>
+                        ))}
+                    </div>
+                </center>
+                <NavLink to="/home">Save another spot!</NavLink> <br></br>
+            </div>
+        );
+    }
+
 };
 
 export default MySpots;

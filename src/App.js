@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import MySpots from './pages/MySpots';
 import Logout from './pages/Logout';
 import VerifyEmail from './pages/VerifyEmail';
+import Settings from './pages/Settings';
 
 import { Protected } from './components/Protected'
 import {
@@ -51,6 +52,12 @@ function App() {
                   element={
                       <Protected loginStatus={isLoggedIn}>
                           <VerifyEmail />
+                      </Protected>
+                  } />
+              <Route path="settings"
+                  element={
+                      <Protected loginStatus={isLoggedIn}>
+                          <Settings />
                       </Protected>
                   } />
 

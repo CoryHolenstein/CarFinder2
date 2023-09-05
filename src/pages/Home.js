@@ -77,7 +77,7 @@ function Home() {
     return (
         <div>
             <h1>Home</h1>
-            <h2>Hello {username}</h2>
+            
             <NavBar/>
             <h3>Save a Spot</h3>
             <center>

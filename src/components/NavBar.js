@@ -4,10 +4,13 @@ export const NavBar =() => {
     return (
         <div>
             <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/home">Home</NavLink>
             </li>
             <li>
                 <NavLink to="/myspots">My Spots</NavLink>
+            </li>
+            <li>
+                <NavLink to="/settings">Settings</NavLink>
             </li>
             <li>
                 <NavLink to="/logout">Logout</NavLink>
