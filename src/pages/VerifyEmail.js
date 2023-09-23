@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil'
 import { useNavigate, NavLink } from 'react-router-dom';
 
 
-const API_URL = 'https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/getspots';
+const API_URL = 'https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/createcode';
 function VerifyEmail() {
 
     //const [email, setEmail] = useState("");
@@ -38,7 +38,6 @@ function VerifyEmail() {
         const fetchData = async () => {
             try {
                 const response = await axios.post(API_URL, body);
-                console.log(response);
                 setData(response.data);
             } catch (error) {
                 console.error(error);
@@ -50,20 +49,20 @@ function VerifyEmail() {
 
     //for when click the send button
     const submitForm = (event) => {
-        event.preventDefault();
-        var url = "";
+        //event.preventDefault();
+        var url = 'https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/verifyemail'; 
         axios.post(url, {
             username: username,
-            emailCode: emailCode
+            code: emailCode
         })
                 .then(function (response) {
                     console.log(response);
                     if (response.data === "OK") {
                         setIsLoggedIn("true");
-                        routeChange("../home");
+                        routeChange("../Home");;
                     } else {
                         setErrorResponse("Invalid code");
-                        setTimeout(() => { setErrorResponse("") }, 8500);
+                        //setTimeout(() => { setErrorResponse("") }, 12500);
                     }
                 })
                 .catch(function (error) {
@@ -71,18 +70,18 @@ function VerifyEmail() {
                 });
 
           //  routeChange("../home");
-            setIsLoggedIn("true");
+           // setIsLoggedIn("true");
         }
 
     return (
         <div>
 
             <center>
-                <div> Verify Email </div>
+                <div> <h1>Verify Your Email</h1> </div>
 
                 <Flex direction="column" width="55%">
                     <h3> Please enter the code that was sent to {username} </h3>  
-                    <form onSubmit={submitForm}>
+                    <form>
                     <TextField
                         placeholder="Email Code"
                         label="Code"
@@ -90,9 +89,12 @@ function VerifyEmail() {
                         errorMessage="There is an error"
                         onChange={e => setEmailCode(e.target.value)}
                         />
+                        <Button size="small" onClick={() => submitForm()} disabled={!emailCode}>Verify Code</Button>
+
+                        <Button size="small"  disabled={true}>Send new code</Button>
                     </form>
                 </Flex>
-                <Button size="small" type="submit" disabled={!emailCode}>Verify Code</Button>
+                
                 <h3 className="error-response">{errorResponse}</h3>
                 <h3>Or you can verify your email later</h3>
                 <Button size="small" onClick={() => verifyLater()} >Verify Later</Button>
