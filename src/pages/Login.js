@@ -50,37 +50,80 @@ function Login() {
         //  routeChange("../home");
        
     }
-
+    const style = {
+        "--primary-color": "#5cb8ff",
+        "--secondary-color": "#62c3ff",
+        "--background-color": "#cccccc",
+        "--label-color": "#0066ff",
+    };
     return (
-        <div>
+        <div
+            className="login-page"
+            style={{
+                ...style,
+                backgroundColor: "var(--background-color)",
+                height: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+            }}
+        >
 
-        <center>
-              <div> Login </div> 
+            <center>
+                <h1 style={{ color: "var(--label-color)", }}>Car Finder</h1>
+                <h2 style={{ color: "var(--primary-color)" }}>Login</h2>
 
-                <Flex direction="column" width="55%">
-              <form onSubmit={submitForm}>
+                <Flex direction="column" >
+                    <form onSubmit={submitForm} style={{ border: "2px solid var(--primary-color)", padding: "25px" }}>
+                        <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                            Email
+                        </label>
                 <TextField
                             placeholder="Email"
                             required={true}
-                            label="Email"
                             type="email"
                         errorMessage="There is an error"
                         onChange={e => setUsername(e.target.value)}
-                    
+                         style={{
+                                width: "200px",
+                                margin: "10px",
+                                border: "2px solid var(--primary-color)",
+                                borderRadius: "5px",
+                                padding: "5px",
+                                boxShadow: "0 0 5px var(--secondary-color)",
+                            }}
                     />
-                <br></br>
+                        <br></br>
+                        <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                            Password
+                        </label>
                 <TextField
                         placeholder="Password"
-                            label="Password"
                             required={true}
                         errorMessage="There is an error"
-                        onChange={e => setPassword(e.target.value)}
+                            onChange={e => setPassword(e.target.value)}
+                            style={{
+                                width: "200px",
+                                margin: "10px",
+                                border: "2px solid var(--primary-color)",
+                                borderRadius: "5px",
+                                padding: "5px",
+                                boxShadow: "0 0 5px var(--secondary-color)",
+                            }}
                     />
-                        <Button size="small" type="submit" >Login</Button>
+                        <Button size="small" type="submit" style={{
+                            width: "100px",
+                            margin: "10px",
+                            backgroundColor: "var(--primary-color)",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "5px",
+                            padding: "10px",
+                        }} >Login</Button>
                     </form>
                     <h3 className="error-response">{errorResponse}</h3>
                 </Flex>
-                <h1> No Account?</h1>
+                <h2 style={{ color: "var(--label-color)" }}>No Account?</h2>
                 <NavLink to="/register">Register now!</NavLink>
             </center>
         </div>

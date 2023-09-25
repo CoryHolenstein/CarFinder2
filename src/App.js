@@ -10,12 +10,14 @@ import MySpots from './pages/MySpots';
 import Logout from './pages/Logout';
 import VerifyEmail from './pages/VerifyEmail';
 import Settings from './pages/Settings';
+import TestPage from './pages/TestPage';
 
 import { Protected } from './components/Protected'
 import {
     useRecoilValue
 } from 'recoil';
 import { isLoggedInState } from './atoms';
+
 
 
 
@@ -66,7 +68,8 @@ function App() {
                   
                 
                   <Route path="register" element={<Register />} />
-                  <Route path="error" element={<Error />} />
+              <Route path="error" element={<Error />} />
+              <Route path="testpage" element={<TestPage />} />
               </Routes>
     
     </div>
