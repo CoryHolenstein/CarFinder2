@@ -14,3 +14,8 @@ export const isLoggedInState = atom({
     key: "isLoggedInState",
     default: "false"
 })
+
+export const isVerifiedState = atom({
+    key: "isVerifiedState",
+    default: "false"
+})

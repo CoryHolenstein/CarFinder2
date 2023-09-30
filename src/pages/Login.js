@@ -1,6 +1,6 @@
 
 
-import { usernameState, isLoggedInState } from '../atoms';
+import { usernameState, isLoggedInState, isVerifiedState } from '../atoms';
 import * as React from 'react';
 import { useState } from "react";
 import { TextField, Button, Flex } from '@aws-amplify/ui-react';
@@ -11,6 +11,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 function Login() {
 
     //const [email, setEmail] = useState("");
+    const [isVerified, setIsVerified] = useRecoilState(isVerifiedState);
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
     const [username, setUsername] = useRecoilState(usernameState);
     const [password, setPassword] = useState("");
@@ -35,9 +36,11 @@ function Login() {
         })
             .then(function (response) {
                 console.log(response);
-                if (response.data === "OK") {
+                if (response.data.results.length > 0) {
+                  
                     setIsLoggedIn("true");
                     routeChange("../home");
+                    setIsVerified(response.data.results[0].verified);
                 } else {
                     setErrorResponse("Wrong email or password!");
                     setTimeout(() => { setErrorResponse("") }, 8500);
@@ -53,7 +56,7 @@ function Login() {
     const style = {
         "--primary-color": "#5cb8ff",
         "--secondary-color": "#62c3ff",
-        "--background-color": "#cccccc",
+        "--background-color": "#798AB2",
         "--label-color": "#0066ff",
     };
     return (

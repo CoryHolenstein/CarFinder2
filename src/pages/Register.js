@@ -64,7 +64,7 @@ function Register() {
     const style = {
         "--primary-color": "#5cb8ff",
         "--secondary-color": "#62c3ff",
-        "--background-color": "#cccccc",
+        "--background-color": "#798AB2",
         "--label-color": "#0066ff",
     };
     return (

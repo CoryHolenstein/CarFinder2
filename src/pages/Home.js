@@ -1,7 +1,7 @@
 
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { usernameState } from '../atoms';
+import { usernameState, isVerifiedState } from '../atoms';
 import { NavBar } from '../components/NavBar';
 import * as React from 'react';
 import { useState } from "react";
@@ -17,6 +17,7 @@ function Home() {
             userDecisionTimeout: 5000,
         });
     const username = useRecoilValue(usernameState);
+    const isVerified = useRecoilValue(isVerifiedState);
 
     const [spotName, setSpotName] = useState("");
     const [spotNumber, setSpotNumber] = useState("");
@@ -77,7 +78,8 @@ function Home() {
     return (
         <div>
             <h1>Home</h1>
-            
+            <h2>{username}</h2>
+            <h4>{isVerified === "true" ? <p>You are verified! {isVerified}</p> : <p> You are not verified! <NavLink to="/verifyemail">Verify now!</NavLink> </p>}</h4>
             <NavBar/>
             <h3>Save a Spot</h3>
             <center>
