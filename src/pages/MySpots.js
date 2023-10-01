@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
+import { TextField, Button, Flex } from '@aws-amplify/ui-react';
 import { usernameState } from '../atoms';
 import { NavLink } from 'react-router-dom';
 import { NavBar } from '../components/NavBar'
@@ -10,6 +11,7 @@ const MySpots = () => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [errorResponse, setErrorResponse] = useState("");
+    const [search, setSearch] = useState("");
 
     const username = useRecoilValue(usernameState);
 
@@ -39,6 +41,13 @@ const MySpots = () => {
         fetchData();
     }, []);
 
+    const style = {
+        "--primary-color": "#01B0D3",
+        "--secondary-color": "#01B0D3",
+        "--background-color": "#242333",
+        "--label-color": "#FFFFFF",
+    };
+
     if (isLoading === true) {
         return <div>Loading...</div>
     } else if (errorResponse !== "") {
@@ -52,10 +61,45 @@ const MySpots = () => {
                 <NavBar />
                 <h1>My Spots</h1>
                 <center>
-                    <div className="spots">
-                       
+                    <div className="spots" style={{
+                        ...style,
+                        backgroundColor: "var(--background-color)",
+                        height: "100vh",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}>
+                        <div>
+                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                                Search spots
+                            </label>
+                            <TextField
+                                placeholder="Find a spot"
+                                required={true}
+                                errorMessage="There is an error"
+                                onChange={e => setSearch(e.target.value)}
+                                style={{
+                                    color: "white",
+                                    width: "200px",
+                                    margin: "10px",
+                                    border: "2px solid var(--primary-color)",
+                                    borderRadius: "5px",
+                                    padding: "5px",
+                                    boxShadow: "0 0 5px var(--secondary-color)",
+                                }}
+                            />
+                        </div>
+                    <div>
                         {data.map((item, index) => (
-                            <h3 key={index}>
+                            <h3 key={index} style={{
+                                color: "white",
+                                width: "200px",
+                                margin: "10px",
+                                border: "2px solid var(--primary-color)",
+                                borderRadius: "5px",
+                                padding: "5px",
+                                boxShadow: "0 0 5px var(--secondary-color)",
+                            }}>
                                 <tr> Spot Name: {item.spotname} {item.createtime} </tr>
                                 Streetname: {item.streetname}
                                 Notes: {item.spotnotes}
@@ -64,10 +108,23 @@ const MySpots = () => {
 
                             </h3>
                         ))}
+                        </div>
+                       
                     </div>
+
                 </center>
-                <NavLink to="/home">Save another spot!</NavLink> <br></br>
+                <div style={{
+                    ...style,
+                    backgroundColor: "var(--background-color)",
+                    display: "flex",
+                    color: "white",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <NavLink to="/home">Save another spot!</NavLink> <br></br>
+                </div>
             </div>
+
         );
     }
 

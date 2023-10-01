@@ -54,10 +54,10 @@ function Login() {
        
     }
     const style = {
-        "--primary-color": "#5cb8ff",
-        "--secondary-color": "#62c3ff",
-        "--background-color": "#798AB2",
-        "--label-color": "#0066ff",
+        "--primary-color": "#01B0D3",
+        "--secondary-color": "#01B0D3",
+        "--background-color": "#242333",
+        "--label-color": "#FFFFFF",
     };
     return (
         <div
@@ -73,7 +73,7 @@ function Login() {
         >
 
             <center>
-                <h1 style={{ color: "var(--label-color)", }}>Car Finder</h1>
+                <h1 style={{ color: "var(--primary-color)", }}>Car Finder</h1>
                 <h2 style={{ color: "var(--primary-color)" }}>Login</h2>
 
                 <Flex direction="column" >
@@ -87,7 +87,8 @@ function Login() {
                             type="email"
                         errorMessage="There is an error"
                         onChange={e => setUsername(e.target.value)}
-                         style={{
+                            style={{
+                                color:"white",
                                 width: "200px",
                                 margin: "10px",
                                 border: "2px solid var(--primary-color)",
@@ -106,6 +107,7 @@ function Login() {
                         errorMessage="There is an error"
                             onChange={e => setPassword(e.target.value)}
                             style={{
+                                color: "white",
                                 width: "200px",
                                 margin: "10px",
                                 border: "2px solid var(--primary-color)",

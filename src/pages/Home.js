@@ -71,58 +71,131 @@ function Home() {
             });
     } 
 
+    const style = {
+        "--primary-color": "#01B0D3",
+        "--secondary-color": "#01B0D3",
+        "--background-color": "#242333",
+        "--label-color": "#FFFFFF",
+    };
+
     if (!isGeolocationAvailable || !isGeolocationEnabled) {
         return <div>Geolocation not available / enabled!</div>
     } else {
-
     return (
-        <div>
+        
+            <div className="home" style={{
+                ...style,
+                backgroundColor: "var(--background-color)",
+                height: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+            }}>
+         <div>
             <h1>Home</h1>
             <h2>{username}</h2>
             <h4>{isVerified === "true" ? <p>You are verified! {isVerified}</p> : <p> You are not verified! <NavLink to="/verifyemail">Verify now!</NavLink> </p>}</h4>
-            <NavBar/>
+                <NavBar />
+            
             <h3>Save a Spot</h3>
             <center>
             <Flex direction="column" width="55%">
-            <form onSubmit={saveSpot}>
+             <form onSubmit={saveSpot}>
+                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                                Spot Name
+                            </label>
             <TextField
                 placeholder="Spot Name"
-                label="Spot name"
                 errorMessage="There is an error"
-                onChange={e => setSpotName(e.target.value)}
+                                onChange={e => setSpotName(e.target.value)}
+                                style={{
+                                    color: "white",
+                                    width: "200px",
+                                    margin: "10px",
+                                    border: "2px solid var(--primary-color)",
+                                    borderRadius: "5px",
+                                    padding: "5px",
+                                    boxShadow: "0 0 5px var(--secondary-color)",
+                                }}
 
-             />
+                            />
+                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                                Spot Number
+                            </label>
              <TextField
                     placeholder="Spot Number"
-                    label="Spot Number"
                     errorMessage="There is an error"
-                    onChange={e => setSpotNumber(e.target.value)}
-                />
+                                onChange={e => setSpotNumber(e.target.value)}
+                                style={{
+                                    color: "white",
+                                    width: "200px",
+                                    margin: "10px",
+                                    border: "2px solid var(--primary-color)",
+                                    borderRadius: "5px",
+                                    padding: "5px",
+                                    boxShadow: "0 0 5px var(--secondary-color)",
+                                }}
+                            />
+                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                                Spot Level
+                            </label>
             <TextField
                     placeholder="Spot Level"
-                    label="Spot Level"
                     errorMessage="There is an error"
-                    onChange={e => setSpotLevel(e.target.value)}
-             />
+                                onChange={e => setSpotLevel(e.target.value)}
+                                style={{
+                                    color: "white",
+                                    width: "200px",
+                                    margin: "10px",
+                                    border: "2px solid var(--primary-color)",
+                                    borderRadius: "5px",
+                                    padding: "5px",
+                                    boxShadow: "0 0 5px var(--secondary-color)",
+                                }}
+                            />
+                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                                Street Name
+                            </label>
             <TextField
                 placeholder="Street Name"
-                label="Street name"
                 errorMessage="There is an error"
-                onChange={e => setStreetName(e.target.value)}
-            />
+                                onChange={e => setStreetName(e.target.value)}
+                                style={{
+                                    color: "white",
+                                    width: "200px",
+                                    margin: "10px",
+                                    border: "2px solid var(--primary-color)",
+                                    borderRadius: "5px",
+                                    padding: "5px",
+                                    boxShadow: "0 0 5px var(--secondary-color)",
+                                }}
+                            />
+                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                                Spot Notes
+                            </label>
             <TextField
                 placeholder="Spot Notes"
-                label="Spot Notes"
                 errorMessage="There is an error"
-                onChange={e => setSpotNotes(e.target.value)}
+                                onChange={e => setSpotNotes(e.target.value)}
+                                style={{
+                                    color: "white",
+                                    width: "200px",
+                                    margin: "10px",
+                                    border: "2px solid var(--primary-color)",
+                                    borderRadius: "5px",
+                                    padding: "5px",
+                                    boxShadow: "0 0 5px var(--secondary-color)",
+                                }}
             />
                 <Button size="small" type="submit">Save Spot</Button>
                 </form>
                 </Flex>
        
                
-            </center>
-        </div>
+                </center>
+            </div>
+            </div>
+       
 
         );
     }
