@@ -13,6 +13,9 @@ export const NavBar =() => {
                 <NavLink to="/settings">Settings</NavLink>
             </li>
             <li>
+                <NavLink to="/testpage">Test Page</NavLink>
+            </li>
+            <li>
                 <NavLink to="/logout">Logout</NavLink>
             </li>
         
