@@ -5,7 +5,7 @@ import { TextField, Button, Flex } from '@aws-amplify/ui-react';
 import { usernameState } from '../atoms';
 import { NavLink } from 'react-router-dom';
 import { NavBar } from '../components/NavBar'
-import { Search } from '../../node_modules/react-router-dom/dist/index';
+
 const API_URL = 'https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/getspots';
 
 const MySpots = () => {
@@ -86,10 +86,10 @@ const MySpots = () => {
                       
                         <div>
                             <NavBar />
-                            <h1>My Spots</h1>
-                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                            <h1 style={{ color: "var(--primary-color)", marginBottom: "5px" }}>My Spots</h1>
+                            <h3 style={{ color: "var(--label-color)", marginBottom: "5px" }}>
                                 Search spots
-                            </label>
+                            </h3>
                             <label style={{ color: "var(--label-color)", marginBottom: "3px" }}>
                                 {searchedSpotLabel}
                             </label>
@@ -127,6 +127,7 @@ const MySpots = () => {
                                 </h3>
                             ))}
                             </div>
+                            <h2 style={{ color: "var(--label-color)", marginBottom: "3px" }}>All Spots</h2>
                         {data.map((item, index) => (
                             <h3 key={index} style={{
                                 color: "white",
@@ -140,7 +141,7 @@ const MySpots = () => {
                                 <tr> Spot Name: {item.spotname} {item.createtime} </tr>
                                 Streetname: {item.streetname}
                                 Notes: {item.spotnotes}
-                                <br></br><button> Open in maps</button>
+                                <br></br><button > Open in maps</button>
                             </h3>
                         ))}
                         </div>

@@ -187,7 +187,7 @@ function Home() {
                                     boxShadow: "0 0 5px var(--secondary-color)",
                                 }}
             />
-                <Button size="small" type="submit">Save Spot</Button>
+               <Button size="small" type="submit" style={{ color: "var(--primary-color)", marginBottom: "5px" }}>Save Spot</Button>
                 </form>
                 </Flex>
        
