@@ -157,7 +157,7 @@ const MySpots = () => {
                     alignItems: "center",
                     justifyContent: "center",
                 }}>
-                    <NavLink to="/home">Save another spot!</NavLink> <br></br>
+                    <NavLink to="/home" style={{ padding: "4px", border: "2px solid var(--primary-color)" }} >Save another spot!</NavLink> <br></br>
                 </div>
             </div>
 

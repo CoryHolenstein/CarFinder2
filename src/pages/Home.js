@@ -94,8 +94,8 @@ function Home() {
          <div>
             <h1>Home</h1>
             <h2>{username}</h2>
-            <h4>{isVerified === "true" ? <p>You are verified! {isVerified}</p> : <p> You are not verified! <NavLink to="/verifyemail">Verify now!</NavLink> </p>}</h4>
-                <NavBar />
+            <h4>{isVerified === "true" ? <p>You are verified!</p> : <p> You are not verified! <NavLink to="/verifyemail">Verify now!</NavLink> </p>}</h4>
+                <div> <NavBar /></div> 
             
             <h3>Save a Spot</h3>
             <center>
