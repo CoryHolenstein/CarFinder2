@@ -92,12 +92,12 @@ function Home() {
                 justifyContent: "center",
             }}>
          <div>
-            <h1>Home</h1>
-            <h2>{username}</h2>
-            <h4>{isVerified === "true" ? <p>You are verified!</p> : <p> You are not verified! <NavLink to="/verifyemail">Verify now!</NavLink> </p>}</h4>
+                <h1 style={{ color: "var(--primary-color)" }}>Home</h1>
+            
+            <h4>{isVerified === "true" ? <p></p> : <p> You are not verified! <NavLink to="/verifyemail">Verify now!</NavLink> </p>}</h4>
                 <div> <NavBar /></div> 
             
-            <h3>Save a Spot</h3>
+                <h3 style={{ color: "var(--primary-color)" }}>Save a Spot</h3>
             <center>
             <Flex direction="column" width="55%">
              <form onSubmit={saveSpot}>
