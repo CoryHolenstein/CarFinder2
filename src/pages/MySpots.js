@@ -21,14 +21,21 @@ const MySpots = () => {
     const body = {
         username: username
     };
+   
+        const openMap = (inputLat, inputLong) => {
+            const latitude = inputLat; // replace with your latitude
+            const longitude = inputLong; // replace with your longitude
+            window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
+        }
 
+    
     useEffect(() => {
         setIsLoading(false);
         const fetchData = async () => {
             try {
                 const response = await axios.post(API_URL, body);
                 setData(response.data);
-                //console.log(response);
+                console.log(response);
                 if (response.data === "NONE") {
                     setErrorResponse("No saved spots!");
                 } else if (response.data === "ERROR") {
@@ -55,7 +62,11 @@ const MySpots = () => {
     }, [searchInput]);
 
 
-
+    function formatDate(dateString) {
+        const options = {  month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', options);
+    }
 
     const style = {
         "--primary-color": "#01B0D3",
@@ -83,9 +94,11 @@ const MySpots = () => {
                         alignItems: "center",
                         justifyContent: "center",
                     }}>
-                      
+                     
                         <div>
-                            <NavBar />
+                            <div> 
+                                <NavBar />
+                            </div>
                             <h1 style={{ color: "var(--primary-color)", marginBottom: "5px" }}>My Spots</h1>
                             <h3 style={{ color: "var(--label-color)", marginBottom: "5px" }}>
                                 Search spots
@@ -120,45 +133,47 @@ const MySpots = () => {
                                     padding: "5px",
                                     boxShadow: "0 0 5px var(--secondary-color)",
                                 }}>
-                                    <tr> Spot Name: {item.spotname} {item.createtime} </tr>
-                                    Streetname: {item.streetname}
+                                    <tr > Spot Name: {item.spotname} </tr>
+                                    <tr>{formatDate(item.createtime)} </tr>
+                                    <tr>Street Name: {item.streetname}</tr>
                                     Notes: {item.spotnotes}
-                                    <br></br><button> Open in maps</button>
+                                    <br></br><button onClick={() => openMap(item.latitude, item.longitude)} > Open in maps</button>
                                 </h3>
                             ))}
                             </div>
+                            
                             <h2 style={{ color: "var(--label-color)", marginBottom: "3px" }}>All Spots</h2>
-                        {data.map((item, index) => (
-                            <h3 key={index} style={{
-                                color: "white",
-                                width: "200px",
-                                margin: "10px",
-                                border: "2px solid var(--primary-color)",
-                                borderRadius: "5px",
-                                padding: "5px",
-                                boxShadow: "0 0 5px var(--secondary-color)",
-                            }}>
-                                <tr> Spot Name: {item.spotname} {item.createtime} </tr>
-                                Streetname: {item.streetname}
-                                Notes: {item.spotnotes}
-                                <br></br><button > Open in maps</button>
-                            </h3>
-                        ))}
-                        </div>
-                       
-                    </div>
+                            <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                {data.map((item, index) => (
+                                    <h2 key={index} style={{
+                                        color: "white",
+                                        width: "200px",
+                                        margin: "10px",
+                                        border: "2px solid var(--primary-color)",
+                                        borderRadius: "5px",
+                                        padding: "5px",
+                                        boxShadow: "0 0 5px var(--secondary-color)",
+                                    }}>
+                                        <tr > Spot Name: {item.spotname} </tr>
+                                        <tr>{formatDate(item.createtime)} </tr>
+                                        <tr>Street Name: {item.streetname}</tr>
+                                        Notes: {item.spotnotes}
+                                        <button onClick={() => openMap(item.latitude, item.longitude)} > Open in maps</button>
+                                    </h2>
+                                ))}
+                                <br></br>
 
+                             
+                            </div>
+                            <div style={{ paddingTop: "12px" }} >
+                                <NavLink to="/home" style={{ padding: "5px",border: "2px solid var(--primary-color)" }} >Save another spot!</NavLink>
+                            </div>
+                         
+                        </div>
+                    </div>
+                  
                 </center>
-                <div style={{
-                    ...style,
-                    backgroundColor: "var(--background-color)",
-                    display: "flex",
-                    color: "white",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}>
-                    <NavLink to="/home" style={{ padding: "4px", border: "2px solid var(--primary-color)" }} >Save another spot!</NavLink> <br></br>
-                </div>
+              
             </div>
 
         );

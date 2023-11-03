@@ -5,6 +5,38 @@ const data = [
     { id: 2, name: 'Bob', email: 'bob@example.com' },
     { id: 3, name: 'Charlie', email: 'charlie@example.com' },
 ];
+
+const data2 = [
+    {
+        "spotvalue": 26,
+        "email": "123@123",
+        "latitude": 33.946033,
+        "longitude": -84.249161,
+        "altitude": 0,
+        "spotname": "1",
+        "spotnumber": "1",
+        "spotlevel": 1,
+        "streetname": "11",
+        "spotnotes": "1",
+        "createtime": "2023-10-01T16:47:27.000Z"
+    },
+    {
+        "spotvalue": 26,
+        "email": "123@123",
+        "latitude": 33.946033,
+        "longitude": -84.249161,
+        "altitude": 0,
+        "spotname": "1",
+        "spotnumber": "1",
+        "spotlevel": 1,
+        "streetname": "11",
+        "spotnotes": "1",
+        "createtime": "2023-10-01T16:47:27.000Z"
+    }
+
+
+];
+
 function TestPage() {
     // This is the state for the search input
     const [searchInput, setSearchInput] = useState('');
@@ -47,6 +79,25 @@ function TestPage() {
                     </li>
                 ))}
             </ul>
+            <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+             {data2.map((item, index) => (
+                <h2 key={index} style={{
+                    color: "white",
+                    width: "200px",
+                    margin: "10px",
+                    border: "2px solid var(--primary-color)",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    boxShadow: "0 0 5px var(--secondary-color)",
+                }}>
+                    <tr > Spot Name: {item.spotname} {item.createtime} </tr>
+                    <tr>Streetname: {item.streetname}</tr>
+                    Notes: {item.spotnotes}
+                    <br></br><button  > Open in maps</button>
+                </h2>
+            ))}
+                
+            </div>
         </div>
     );
 }

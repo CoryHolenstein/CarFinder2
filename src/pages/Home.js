@@ -90,22 +90,26 @@ function Home() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-            }}>
-         <div>
-                <h1 style={{ color: "var(--primary-color)" }}>Home</h1>
+        }}>
+           
+            <div>
+                <center>
+                <h1 style={{ color: "var(--primary-color)", fontSize:"50px" }}>Home</h1>
             
             <h4>{isVerified === "true" ? <p></p> : <p> You are not verified! <NavLink to="/verifyemail">Verify now!</NavLink> </p>}</h4>
                 <div> <NavBar /></div> 
             
                 <h3 style={{ color: "var(--primary-color)" }}>Save a Spot</h3>
-            <center>
-            <Flex direction="column" width="55%">
+            
+            <Flex direction="column" width="75%">
              <form onSubmit={saveSpot}>
-                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                            <label style={{ color: "var(--label-color)", marginBottom: "3px" }}>
                                 Spot Name
                             </label>
-            <TextField
-                placeholder="Spot Name"
+                            <TextField
+                              
+                                placeholder="Spot Name"
+                required="true"
                 errorMessage="There is an error"
                                 onChange={e => setSpotName(e.target.value)}
                                 style={{
@@ -119,7 +123,7 @@ function Home() {
                                 }}
 
                             />
-                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                            <label style={{ color: "var(--label-color)", marginBottom: "3px" }}>
                                 Spot Number
                             </label>
              <TextField
@@ -136,12 +140,13 @@ function Home() {
                                     boxShadow: "0 0 5px var(--secondary-color)",
                                 }}
                             />
-                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                            <label style={{ color: "var(--label-color)", marginBottom: "3px" }}>
                                 Spot Level
                             </label>
             <TextField
                     placeholder="Spot Level"
-                    errorMessage="There is an error"
+                                errorMessage="There is an error"
+
                                 onChange={e => setSpotLevel(e.target.value)}
                                 style={{
                                     color: "white",
@@ -153,7 +158,7 @@ function Home() {
                                     boxShadow: "0 0 5px var(--secondary-color)",
                                 }}
                             />
-                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                            <label style={{ color: "var(--label-color)", marginBottom: "3px" }}>
                                 Street Name
                             </label>
             <TextField
@@ -161,6 +166,7 @@ function Home() {
                 errorMessage="There is an error"
                                 onChange={e => setStreetName(e.target.value)}
                                 style={{
+                                    paddingRight: "50px",
                                     color: "white",
                                     width: "200px",
                                     margin: "10px",
@@ -170,7 +176,7 @@ function Home() {
                                     boxShadow: "0 0 5px var(--secondary-color)",
                                 }}
                             />
-                            <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
+                            <label style={{ color: "var(--label-color)", marginBottom: "3px" }}>
                                 Spot Notes
                             </label>
             <TextField
@@ -187,7 +193,7 @@ function Home() {
                                     boxShadow: "0 0 5px var(--secondary-color)",
                                 }}
             />
-               <Button size="small" type="submit" style={{ color: "var(--primary-color)", marginBottom: "5px" }}>Save Spot</Button>
+               <Button size="medium" type="submit" style={{ color: "var(--primary-color)", marginBottom: "3px" }}>Save Spot</Button>
                 </form>
                 </Flex>
        
