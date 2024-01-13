@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Amplify } from 'aws-amplify';
-import awsconfig from './aws-exports';
+//import { Amplify } from 'aws-amplify';
+//import awsconfig from './aws-exports';
 import "@aws-amplify/ui-react/styles.css";
 import { BrowserRouter } from "react-router-dom";
 import {RecoilRoot } from 'recoil'
-Amplify.configure(awsconfig);
+//Amplify.configure(awsconfig);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <RecoilRoot>
