@@ -78,9 +78,16 @@ const MySpots = () => {
     if (isLoading === true) {
         return <div>Loading...</div>
     } else if (errorResponse !== "") {
-        return <div>
-            <h3 className="error-response">{errorResponse}</h3><br></br>
-            <NavLink to="/home">Return home</NavLink> <br></br>
+        return <div className="spots" style={{
+            ...style,
+            backgroundColor: "var(--background-color)",
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+        }}>
+            <div><h3 className="error-response">{errorResponse}</h3><br></br>
+                <NavLink to="/home">Return home</NavLink> </div> 
         </div>
     } else {
         return (

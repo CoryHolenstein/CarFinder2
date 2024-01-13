@@ -46,7 +46,6 @@ function VerifyEmail() {
         fetchData();
     }, []);
 
-
     //for when click the send button
     const submitForm = (event) => {
         //event.preventDefault();
@@ -73,18 +72,29 @@ function VerifyEmail() {
            // setIsLoggedIn("true");
         }
 
+    const style = {
+        "--primary-color": "#01B0D3",
+        "--secondary-color": "#01B0D3",
+        "--background-color": "#242333",
+        "--label-color": "#FFFFFF",
+    };
     return (
-        <div>
-
+        <div className="home" style={{
+            ...style,
+            backgroundColor: "var(--background-color)",
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+        }}>
             <center>
-                <div> <h1>Verify Your Email</h1> </div>
+                <div style={{ color: "var(--primary-color)", fontSize: "20px" }}> <h1>Verify Your Email</h1> </div>
 
                 <Flex direction="column" width="55%">
-                    <h3> Please enter the code that was sent to {username} </h3>  
+                    <h3 style={{ color: "var(--label-color)" }}> Please enter the code that was sent to {username} </h3>  
                     <form>
-                    <TextField
+                        <TextField
                         placeholder="Email Code"
-                        label="Code"
                         required={true}
                         errorMessage="There is an error"
                         onChange={e => setEmailCode(e.target.value)}
@@ -98,7 +108,7 @@ function VerifyEmail() {
                 <h3 className="error-response">{errorResponse}</h3>
                 <h3>Or you can verify your email later</h3>
                 <Button size="small" onClick={() => verifyLater()} >Verify Later</Button>
-                <h1> Have an Account?</h1>
+                <h1 style={{ color: "var(--primary-color)", fontSize: "20px" }}> Have an Account?</h1>
                 <NavLink to="/login">Login here!</NavLink>
 
             </center>
