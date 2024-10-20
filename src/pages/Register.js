@@ -113,6 +113,7 @@ function Register() {
                     <TextField
                             placeholder="Password"
                             errorMessage="There is an error"
+                            type="password"
                             required={true}
                             onChange={e => setPassword(e.target.value)}
                             style={{
@@ -132,6 +133,7 @@ function Register() {
                     <TextField
                         placeholder="Password Confirmation"
                             errorMessage="There is an error"
+                            type="password"
                             required={true}
                             onChange={e => setPasswordConf(e.target.value)}
                             style={{

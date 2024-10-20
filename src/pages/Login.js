@@ -103,7 +103,8 @@ function Login() {
                         </label>
                 <TextField
                         placeholder="Password"
-                            required={true}
+                        type="password"
+                        required={true}
                         errorMessage="There is an error"
                             onChange={e => setPassword(e.target.value)}
                             style={{
