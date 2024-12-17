@@ -1,4 +1,3 @@
-
 import { usernameState, isLoggedInState } from '../atoms';
 import * as React from 'react';
 import { useState } from "react";
@@ -7,15 +6,15 @@ import axios from 'axios';
 import { useRecoilState } from 'recoil'
 import { useNavigate, NavLink } from 'react-router-dom';
 import { getEmailRegex } from '../constants/RegexPatterns' 
+
 function Register() {
 
-    //const [email, setEmail] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
     const [username, setUsername] = useRecoilState(usernameState);
     const [password, setPassword] = useState("");
     const [passwordConf, setPasswordConf] = useState("");
     const [errorResponse, setErrorResponse] = useState("");
-   
+
     let navigate = useNavigate();
     const routeChange = (input) => {
         let path = input;
@@ -27,46 +26,46 @@ function Register() {
         console.log(username, password);
 
         if (password !== passwordConf) {
-            alert("passwords do not match")
-            return;
-        } 
-
-        if (password.length < 10) {
-            alert("password needs to be at least 10 characters")
+            setErrorResponse("Passwords do not match.");
+            setTimeout(() => { setErrorResponse(""); }, 8500);
             return;
         }
 
-        
-
+        if (password.length < 10) {
+            setErrorResponse("Password needs to be at least 10 characters.");
+            setTimeout(() => { setErrorResponse(""); }, 8500);
+            return;
+        }
 
         var url = "https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/register";
         axios.post(url, {
-           username: username,
+            email: username,
             password: password
         })
-                .then(function (response) {
-                    console.log(response);
-                    if (response.data === "OK") {
-                        setIsLoggedIn("true");
-                        routeChange("../verifyemail");
-                    } else {
-                        setErrorResponse("Email exists already!");
-                        setTimeout(() => { setErrorResponse("") }, 8500);
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+        .then(function (response) {
+            console.log(response);
+            if (response.data.responseStatus === "OK") {
+                setIsLoggedIn("true");
+                routeChange("../verifyemail");
+            } else {
+                setErrorResponse("Email exists already!");
+                setTimeout(() => { setErrorResponse(""); }, 8500);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+            setErrorResponse("An error occurred during registration.");
+            setTimeout(() => { setErrorResponse(""); }, 8500);
+        });
+    }
 
-          //  routeChange("../home");
-            setIsLoggedIn("true");
-        }
     const style = {
         "--primary-color": "#01B0D3",
         "--secondary-color": "#01B0D3",
         "--background-color": "#242333",
         "--label-color": "#FFFFFF",
     };
+
     return (
         <div
             className="login-page"
@@ -79,11 +78,9 @@ function Register() {
                 justifyContent: "center",
             }}
         >
-
             <center>
                 <h1 style={{ color: "var(--primary-color)", }}>Car Finder</h1>
                 <h2 style={{ color: "var(--primary-color)" }}>Register</h2>
-
                 <Flex direction="column">
                     <form onSubmit={submitForm} style={{ border: "2px solid var(--primary-color)", padding: "25px" }}>
                         <label style={{ color: "var(--label-color)" }}>
@@ -105,12 +102,12 @@ function Register() {
                                 padding: "5px",
                                 boxShadow: "0 0 5px var(--secondary-color)",
                             }}
-                    />
-                        <br></br>
+                        />
+                        <br />
                         <label style={{ color: "var(--label-color)" }}>
                             Password
                         </label>
-                    <TextField
+                        <TextField
                             placeholder="Password"
                             errorMessage="There is an error"
                             type="password"
@@ -125,13 +122,13 @@ function Register() {
                                 padding: "5px",
                                 boxShadow: "0 0 5px var(--secondary-color)",
                             }}
-                    />
-                        <br></br>
+                        />
+                        <br />
                         <label style={{ color: "var(--label-color)" }}>
                             Password Confirmation
                         </label>
-                    <TextField
-                        placeholder="Password Confirmation"
+                        <TextField
+                            placeholder="Password Confirmation"
                             errorMessage="There is an error"
                             type="password"
                             required={true}
@@ -154,16 +151,14 @@ function Register() {
                             border: "none",
                             borderRadius: "5px",
                             padding: "10px",
-                        }}  >Register</Button>
+                        }}>Register</Button>
                     </form>
                     <h3 className="error-response">{errorResponse}</h3>
                 </Flex>
                 <h2 style={{ color: "var(--label-color)" }}>Have an Account?</h2>
                 <NavLink to="/login">Login here!</NavLink>
-
             </center>
         </div>
-
     );
 }
 

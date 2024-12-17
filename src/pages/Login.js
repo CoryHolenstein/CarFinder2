@@ -1,21 +1,17 @@
-
-
 import { usernameState, isLoggedInState, isVerifiedState } from '../atoms';
 import * as React from 'react';
 import { useState } from "react";
 import { TextField, Button, Flex } from '@aws-amplify/ui-react';
 import axios from 'axios';
-import {useRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil';
 import { useNavigate, NavLink } from 'react-router-dom';
 
 function Login() {
 
-    //const [email, setEmail] = useState("");
     const [isVerified, setIsVerified] = useRecoilState(isVerifiedState);
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
     const [username, setUsername] = useRecoilState(usernameState);
     const [password, setPassword] = useState("");
-
     const [errorResponse, setErrorResponse] = useState("");
 
     let navigate = useNavigate();
@@ -31,34 +27,34 @@ function Login() {
         var url = "https://jcgz0lxwv3.execute-api.us-east-1.amazonaws.com/dev/user/login";
 
         axios.post(url, {
-            username: username,
+            email: username, // Changing 'username' to 'email' for consistency
             password: password
         })
-            .then(function (response) {
-                console.log(response);
-                if (response.data.results.length > 0) {
-                  
-                    setIsLoggedIn("true");
-                    routeChange("../home");
-                    setIsVerified(response.data.results[0].verified);
-                } else {
-                    setErrorResponse("Wrong email or password!");
-                    setTimeout(() => { setErrorResponse("") }, 8500);
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        //  routeChange("../home");
-       
+        .then(function (response) {
+            console.log(response);
+            if (response.data.results && response.data.results.length > 0) {
+                setIsLoggedIn("true");
+                setIsVerified(response.data.results[0].verified);
+                routeChange("../home");
+            } else {
+                setErrorResponse("Wrong email or password!");
+                setTimeout(() => { setErrorResponse("") }, 8500);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+            setErrorResponse("An error occurred during login.");
+            setTimeout(() => { setErrorResponse("") }, 8500);
+        });
     }
+
     const style = {
         "--primary-color": "#01B0D3",
         "--secondary-color": "#01B0D3",
         "--background-color": "#242333",
         "--label-color": "#FFFFFF",
     };
+
     return (
         <div
             className="login-page"
@@ -71,24 +67,23 @@ function Login() {
                 justifyContent: "center",
             }}
         >
-
             <center>
                 <h1 style={{ color: "var(--primary-color)", }}>Car Finder</h1>
                 <h2 style={{ color: "var(--primary-color)" }}>Login</h2>
 
-                <Flex direction="column" >
+                <Flex direction="column">
                     <form onSubmit={submitForm} style={{ border: "2px solid var(--primary-color)", padding: "25px" }}>
                         <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
                             Email
                         </label>
-                <TextField
+                        <TextField
                             placeholder="Email"
                             required={true}
                             type="email"
-                        errorMessage="There is an error"
-                        onChange={e => setUsername(e.target.value)}
+                            errorMessage="There is an error"
+                            onChange={e => setUsername(e.target.value)}
                             style={{
-                                color:"white",
+                                color: "white",
                                 width: "200px",
                                 margin: "10px",
                                 border: "2px solid var(--primary-color)",
@@ -96,16 +91,16 @@ function Login() {
                                 padding: "5px",
                                 boxShadow: "0 0 5px var(--secondary-color)",
                             }}
-                    />
-                        <br></br>
+                        />
+                        <br />
                         <label style={{ color: "var(--label-color)", marginBottom: "5px" }}>
                             Password
                         </label>
-                <TextField
-                        placeholder="Password"
-                        type="password"
-                        required={true}
-                        errorMessage="There is an error"
+                        <TextField
+                            placeholder="Password"
+                            type="password"
+                            required={true}
+                            errorMessage="There is an error"
                             onChange={e => setPassword(e.target.value)}
                             style={{
                                 color: "white",
@@ -116,7 +111,7 @@ function Login() {
                                 padding: "5px",
                                 boxShadow: "0 0 5px var(--secondary-color)",
                             }}
-                    />
+                        />
                         <Button size="small" type="submit" style={{
                             width: "100px",
                             margin: "10px",
@@ -125,7 +120,7 @@ function Login() {
                             border: "none",
                             borderRadius: "5px",
                             padding: "10px",
-                        }} >Login</Button>
+                        }}>Login</Button>
                     </form>
                     <h3 className="error-response">{errorResponse}</h3>
                 </Flex>
@@ -133,7 +128,6 @@ function Login() {
                 <NavLink to="/register">Register now!</NavLink>
             </center>
         </div>
-
     );
 }
 
