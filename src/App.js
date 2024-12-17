@@ -62,7 +62,7 @@ function App() {
                           <Settings />
                       </Protected>
                   } />
-
+                  <Route path="" element={<Login />} />
                   <Route path="/" element={<Login />} />
                   <Route path="login" element={<Login />} />
                   
